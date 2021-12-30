@@ -3,14 +3,12 @@ let root = document.documentElement;
 let styles = getComputedStyle(root); 
 let gridCols = styles.getPropertyValue('--grid-cols');  
 
-
-if (screen.width > screen.height){ 
-//if width is more than height, use height and vice versa. 
-    container.style.width = '100vh'; 
-    container.style.height = '100vh'; 
+if (screen.width > screen.height){
+    container.style.width = '75vh'; 
+    container.style.height = '75vh'; 
 } else {
-    container.style.width = '100vw'; 
-    container.style.height = '100vw'; 
+    container.style.width = '90vw'; 
+    container.style.height = '90vw'; 
 }
 for (let i = 0; i < gridCols; i++){
     for (let j = 0; j < gridCols; j++){
