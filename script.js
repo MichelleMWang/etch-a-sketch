@@ -1,11 +1,7 @@
 const container = document.querySelector('.container');
-let styles = getComputedStyle(container); 
-let gridCols = styles.getPropertyValue('--grid-cols'); 
-/*console.log(gridCols); 
-styles.setProperty('--grid-cols', '17'); */  
 let root = document.documentElement; 
-//let gridCols = root.style.getPropertyValue('--grid-cols'); 
-console.log(gridCols); 
+let styles = getComputedStyle(root); 
+let gridCols = styles.getPropertyValue('--grid-cols');  
 
 
 if (screen.width > screen.height){ 
