@@ -1,4 +1,6 @@
 const container = document.querySelector('.container'); 
+let gridCols = container.style.getPropertyValue('--grid-cols'); 
+ 
 if (screen.width > screen.height){ 
 //if width is more than height, use height and vice versa. 
     container.style.width = '100vh'; 
@@ -7,17 +9,49 @@ if (screen.width > screen.height){
     container.style.width = '100vw'; 
     container.style.height = '100vw'; 
 }
-for (let i = 0; i < 16; i++){
-    for (let j = 0; j < 16; j++){
+for (let i = 0; i < gridCols; i++){
+    for (let j = 0; j < gridCols; j++){
     let divy = document.createElement('div'); 
     container.appendChild(divy); 
     }
 }
 
 const divs = container.querySelectorAll('div'); 
-divs.forEach((div) => {
-    console.log('divy!'); 
-    div.addEventListener('mouseover', () => {
-        div.classList.add('darken'); 
-    }); 
-});
+//basic sketch feature 
+
+    divs.forEach((div) => { 
+        div.addEventListener('mouseover', () => {
+            div.classList.add('darken'); 
+        }); 
+    });
+
+
+
+const reset = document.querySelector('.reset'); 
+reset.addEventListener('click', () => {
+    let newSize = prompt('input size for new grid (max 100)'); 
+    if (newSize > 100) {
+        alert('requested size too large (max 100). please try again'); 
+    } else {
+        container.style.setProperty('--grid-cols', newSize);
+        divs.forEach((div) => {
+            div.classList.remove('darken'); 
+            if (newSize > gridCols){
+                for (let i = 0 ; i < newSize - gridCols; i++){
+                    for (let j = 0; j < newSize - gridCols; j++){
+                        let divy = document.createElement('div'); 
+                        divy.addEventListener('mouseover', () => div.classList.add('darken')); 
+                        container.appendChild(divy); 
+                    }
+                }
+            } else {
+                for (let i = 0; i < gridCols - newSize; i++){
+                    for (let j = 0; j < gridCols - newSize; j++){
+                        container.removeChild('div'); 
+                    }
+                }
+            }
+        });
+    }
+    
+}); 
