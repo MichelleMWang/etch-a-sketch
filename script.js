@@ -1,6 +1,13 @@
-const container = document.querySelector('.container'); 
-let gridCols = container.style.getPropertyValue('--grid-cols'); 
- 
+const container = document.querySelector('.container');
+let styles = getComputedStyle(container); 
+let gridCols = styles.getPropertyValue('--grid-cols'); 
+/*console.log(gridCols); 
+styles.setProperty('--grid-cols', '17'); */  
+let root = document.documentElement; 
+//let gridCols = root.style.getPropertyValue('--grid-cols'); 
+console.log(gridCols); 
+
+
 if (screen.width > screen.height){ 
 //if width is more than height, use height and vice versa. 
     container.style.width = '100vh'; 
@@ -33,7 +40,7 @@ reset.addEventListener('click', () => {
     if (newSize > 100) {
         alert('requested size too large (max 100). please try again'); 
     } else {
-        container.style.setProperty('--grid-cols', newSize);
+        root.style.setProperty('--grid-cols', newSize);
         divs.forEach((div) => {
             div.classList.remove('darken'); 
             if (newSize > gridCols){
